@@ -1,19 +1,19 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1400" preserveAspectRatio="xMidYMid slice">
 <defs>
-  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#042f2e"/><stop offset=".55" stop-color="#0f766e"/><stop offset="1" stop-color="#155e75"/></linearGradient>
-  <radialGradient id="g1" cx=".2" cy=".15" r=".6"><stop offset="0" stop-color="#5eead4" stop-opacity=".5"/><stop offset="1" stop-color="#5eead4" stop-opacity="0"/></radialGradient>
-  <radialGradient id="g2" cx=".9" cy=".9" r=".6"><stop offset="0" stop-color="#38bdf8" stop-opacity=".45"/><stop offset="1" stop-color="#38bdf8" stop-opacity="0"/></radialGradient>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3F1029"/><stop offset=".55" stop-color="#85255A"/><stop offset="1" stop-color="#5E2A78"/></linearGradient>
+  <radialGradient id="g1" cx=".2" cy=".15" r=".6"><stop offset="0" stop-color="#FA9BCF" stop-opacity=".55"/><stop offset="1" stop-color="#FA9BCF" stop-opacity="0"/></radialGradient>
+  <radialGradient id="g2" cx=".9" cy=".9" r=".6"><stop offset="0" stop-color="#D9A0F0" stop-opacity=".45"/><stop offset="1" stop-color="#D9A0F0" stop-opacity="0"/></radialGradient>
   <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.5" fill="#fff" fill-opacity=".13"/></pattern>
-  <g id="cap"><rect width="160" height="62" rx="31" fill="#fff" fill-opacity=".09"/><path d="M31 0h50v62H31A31 31 0 0 1 31 0Z" fill="#fff" fill-opacity=".17"/></g>
-  <g id="plus"><path d="M-15 0h30M0-15v30" stroke="#fff" stroke-opacity=".28" stroke-width="5" stroke-linecap="round"/></g>
+  <g id="cap"><rect width="160" height="62" rx="31" fill="#fff" fill-opacity=".09"/><path d="M31 0h50v62H31A31 31 0 0 1 31 0Z" fill="#FFCAE9" fill-opacity=".22"/></g>
+  <g id="plus"><path d="M-15 0h30M0-15v30" stroke="#FFCAE9" stroke-opacity=".4" stroke-width="5" stroke-linecap="round"/></g>
 </defs>
 <rect width="1200" height="1400" fill="url(#bg)"/>
 <rect width="1200" height="1400" fill="url(#g1)"/>
 <rect width="1200" height="1400" fill="url(#g2)"/>
 <rect width="1200" height="1400" fill="url(#dots)"/>
-<circle cx="980" cy="260" r="260" fill="none" stroke="#fff" stroke-opacity=".08" stroke-width="2"/>
-<circle cx="980" cy="260" r="180" fill="none" stroke="#fff" stroke-opacity=".08" stroke-width="2"/>
-<circle cx="180" cy="1180" r="300" fill="none" stroke="#fff" stroke-opacity=".07" stroke-width="2"/>
+<circle cx="980" cy="260" r="260" fill="none" stroke="#fff" stroke-opacity=".09" stroke-width="2"/>
+<circle cx="980" cy="260" r="180" fill="none" stroke="#fff" stroke-opacity=".09" stroke-width="2"/>
+<circle cx="180" cy="1180" r="300" fill="none" stroke="#fff" stroke-opacity=".08" stroke-width="2"/>
 <use href="#cap" transform="translate(760 120) rotate(-32)"/>
 <use href="#cap" transform="translate(90 470) rotate(24) scale(1.25)"/>
 <use href="#cap" transform="translate(820 760) rotate(-18) scale(.9)"/>
@@ -22,11 +22,11 @@
 <use href="#plus" transform="translate(1040 540)"/><use href="#plus" transform="translate(420 150)"/>
 <use href="#plus" transform="translate(130 800) scale(1.4)"/><use href="#plus" transform="translate(610 1300)"/>
 <use href="#plus" transform="translate(1100 980) scale(.8)"/>
-<g stroke="#fff" stroke-opacity=".22" stroke-width="3" fill="none">
+<g stroke="#FFCAE9" stroke-opacity=".3" stroke-width="3" fill="none">
   <path d="M520 560 L600 520 L690 570 L690 670 L600 720 L520 670 Z"/>
   <path d="M690 570 L770 530 M600 720 L600 800 M520 560 L440 520"/>
 </g>
-<g fill="#fff" fill-opacity=".35">
+<g fill="#FFCAE9" fill-opacity=".5">
   <circle cx="520" cy="560" r="9"/><circle cx="600" cy="520" r="9"/><circle cx="690" cy="570" r="9"/>
   <circle cx="690" cy="670" r="9"/><circle cx="600" cy="720" r="9"/><circle cx="520" cy="670" r="9"/>
   <circle cx="770" cy="530" r="12"/><circle cx="600" cy="800" r="12"/><circle cx="440" cy="520" r="12"/>

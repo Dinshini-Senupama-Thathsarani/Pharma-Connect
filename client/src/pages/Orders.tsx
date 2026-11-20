@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../app/store';
 import { changeOrderStatus, clearOrderError, fetchOrders } from '../features/orders/orderSlice';
+import { Icon } from '../components/icons';
+import PageBanner from '../components/PageBanner';
 import { ErrorBox, StatusBadge, money } from '../components/ui';
 import { OrderStatus } from '../types';
 
@@ -17,17 +19,25 @@ export default function Orders() {
   useEffect(() => { dispatch(clearOrderError()); dispatch(fetchOrders(filter || undefined)); }, [filter, dispatch]);
 
   return (
-    <div className="space-y-4">
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <h1 className="text-2xl font-bold">Orders</h1>
-        <div className="flex gap-2">
-          <select className="input w-40" value={filter} onChange={(e) => setFilter(e.target.value as OrderStatus | '')} aria-label="Filter by status">
-            {statuses.map((s) => <option key={s} value={s}>{s ? s[0].toUpperCase() + s.slice(1) : 'All statuses'}</option>)}
-          </select>
-          {role !== 'admin' && <Link to="/orders/new" className="btn-primary whitespace-nowrap">+ New order</Link>}
-        </div>
-      </div>
+    <div className="space-y-6">
+      <PageBanner
+        image="orders"
+        eyebrow="Order tracking"
+        title="Orders"
+        subtitle={role === 'admin' ? 'Review, approve and deliver incoming orders.' : 'Place new orders and follow their status.'}
+        actions={role !== 'admin' ? <Link to="/orders/new" className="btn-secondary"><Icon name="plus" className="h-4 w-4" />New order</Link> : undefined}
+      />
       <ErrorBox message={error} />
+
+      <div className="flex flex-wrap gap-2">
+        {statuses.map((s) => (
+          <button key={s || 'all'} onClick={() => setFilter(s)}
+            className={`rounded-full px-4 py-1.5 text-sm font-medium capitalize transition ${filter === s ? 'bg-linear-to-r from-brand-600 to-accent-600 text-white shadow-md shadow-brand-600/25' : 'bg-white text-slate-600 ring-1 ring-brand-200 hover:bg-brand-50'}`}>
+            {s || 'All orders'}
+          </button>
+        ))}
+      </div>
+
       <div className="space-y-3">
         {items.map((o) => (
           <div key={o._id} className="card">
@@ -37,12 +47,12 @@ export default function Orders() {
                 <div className="text-xs text-slate-500">{o.pharmacy?.name} · {new Date(o.createdAt).toLocaleDateString()} · by {o.placedBy?.name}</div>
               </button>
               <div className="flex items-center gap-3">
-                <span className="font-medium">{money(o.totalAmount)}</span>
+                <span className="font-semibold">{money(o.totalAmount)}</span>
                 <StatusBadge status={o.status} />
               </div>
             </div>
             {open === o._id && (
-              <div className="mt-3 border-t pt-3 text-sm">
+              <div className="mt-3 border-t border-brand-100 pt-3 text-sm">
                 <table className="w-full"><tbody>
                   {o.items.map((i) => (
                     <tr key={i.medicine}><td className="py-1">{i.name}</td><td>{i.qty} × {money(i.unitPrice)}</td><td className="text-right">{money(i.qty * i.unitPrice)}</td></tr>
@@ -61,7 +71,7 @@ export default function Orders() {
             )}
           </div>
         ))}
-        {!items.length && !loading && <p className="text-slate-500">No orders found.</p>}
+        {!items.length && !loading && <div className="card text-center text-slate-500">No orders found.</div>}
       </div>
     </div>
   );

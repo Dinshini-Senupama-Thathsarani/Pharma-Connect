@@ -4,7 +4,7 @@ import { Role, User } from '../../types';
 
 interface AuthState { user: User | null; loading: boolean; error: string | null }
 
-const stored = localStorage.getItem('user');
+const stored = sessionStorage.getItem('user');
 const initialState: AuthState = { user: stored ? (JSON.parse(stored) as User) : null, loading: false, error: null };
 
 interface AuthResponse { user: User; accessToken: string; refreshToken: string }
@@ -34,7 +34,7 @@ const authSlice = createSlice({
     const onSuccess = (s: AuthState, a: { payload: AuthResponse }) => {
       s.loading = false; s.user = a.payload.user;
       storage.save(a.payload.accessToken, a.payload.refreshToken);
-      localStorage.setItem('user', JSON.stringify(a.payload.user));
+      sessionStorage.setItem('user', JSON.stringify(a.payload.user));
     };
     const onPending = (s: AuthState) => { s.loading = true; s.error = null; };
     const onFail = (s: AuthState, a: { payload?: string }) => { s.loading = false; s.error = a.payload ?? 'Failed'; };

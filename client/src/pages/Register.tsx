@@ -20,9 +20,10 @@ export default function Register() {
 
   return (
     <AuthShell
+      nav={{ to: '/login', label: 'Sign in' }}
       title="Create your account"
       subtitle="Join PharmaConnect as a pharmacy or medical representative."
-      footer={<>Already have an account? <Link className="font-semibold text-teal-700 hover:underline" to="/login">Sign in</Link></>}
+      footer={<>Already have an account? <Link className="font-semibold text-white underline underline-offset-4" to="/login">Sign in</Link></>}
     >
       <form onSubmit={submit} className="space-y-4">
         <ErrorBox message={error} />

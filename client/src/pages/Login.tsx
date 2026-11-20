@@ -18,9 +18,10 @@ export default function Login() {
 
   return (
     <AuthShell
+      nav={{ to: '/register', label: 'Create account' }}
       title="Welcome back"
       subtitle="Sign in to manage orders, stock and pharmacies."
-      footer={<>New here? <Link className="font-semibold text-teal-700 hover:underline" to="/register">Create an account</Link></>}
+      footer={<>New here? <Link className="font-semibold text-white underline underline-offset-4" to="/register">Create an account</Link></>}
     >
       <form onSubmit={submit} className="space-y-5">
         <ErrorBox message={error} />

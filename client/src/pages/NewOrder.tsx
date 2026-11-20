@@ -13,7 +13,7 @@ export default function NewOrder() {
   const navigate = useNavigate();
   const role = useAppSelector((s) => s.auth.user?.role);
   const medicines = useAppSelector((s) => s.medicines.items);
-  const pharmacies = useAppSelector((s) => s.pharmacies.items);
+  const { items: pharmacies, loading: pharmaciesLoading, error: pharmaciesError } = useAppSelector((s) => s.pharmacies);
   const [pharmacy, setPharmacy] = useState('');
   const [lines, setLines] = useState<Line[]>([{ medicine: '', qty: 1 }]);
   const [err, setErr] = useState<string | null>(null);
@@ -27,6 +27,9 @@ export default function NewOrder() {
   const submit = async (e: FormEvent) => {
     e.preventDefault();
     setErr(null);
+    if (role === 'pharmacy' && pharmaciesLoading) return setErr('Checking your pharmacy profile. Please try again.');
+    if (role === 'pharmacy' && pharmaciesError) return setErr('Could not load your pharmacy profile. Please try again.');
+    if (role === 'pharmacy' && !pharmacies.length) return setErr('Create your pharmacy profile before placing an order.');
     const items = lines.filter((l) => l.medicine && l.qty > 0);
     if (!items.length) return setErr('Add at least one medicine');
     if (role === 'mr' && !pharmacy) return setErr('Select a pharmacy');
@@ -47,8 +50,15 @@ export default function NewOrder() {
           </select>
         </Field>
       )}
-      {role === 'pharmacy' && !pharmacies.length && (
-        <p className="rounded-lg bg-amber-50 p-3 text-sm text-amber-800">Create your pharmacy profile first (Pharmacies page) before ordering.</p>
+      {role === 'pharmacy' && pharmaciesError && <ErrorBox message={`Could not load your pharmacy profile: ${pharmaciesError}`} />}
+      {role === 'pharmacy' && pharmaciesLoading && (
+        <p className="rounded-lg bg-slate-50 p-3 text-sm text-slate-600">Checking your pharmacy profile...</p>
+      )}
+      {role === 'pharmacy' && !pharmaciesLoading && !pharmaciesError && !pharmacies.length && (
+        <div className="flex flex-wrap items-center justify-between gap-3 rounded-lg bg-amber-50 p-3 text-sm text-amber-800">
+          <span>Create your pharmacy profile before placing an order.</span>
+          <button type="button" className="btn-secondary" onClick={() => navigate('/pharmacies')}>Create profile</button>
+        </div>
       )}
       <div className="space-y-2">
         {lines.map((l, i) => (
@@ -65,7 +75,7 @@ export default function NewOrder() {
       </div>
       <div className="flex items-center justify-between border-t pt-4">
         <div className="text-lg font-semibold">Total: {money(total)}</div>
-        <button className="btn-primary">Place order</button>
+        <button className="btn-primary" disabled={role === 'pharmacy' && (pharmaciesLoading || Boolean(pharmaciesError) || !pharmacies.length)}>Place order</button>
       </div>
     </form>
   );

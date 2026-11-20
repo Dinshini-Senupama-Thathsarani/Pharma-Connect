@@ -4,14 +4,14 @@ const baseURL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 export const api = axios.create({ baseURL });
 
 export const storage = {
-  get access() { return localStorage.getItem('accessToken'); },
-  get refresh() { return localStorage.getItem('refreshToken'); },
+  get access() { return sessionStorage.getItem('accessToken'); },
+  get refresh() { return sessionStorage.getItem('refreshToken'); },
   save(access: string, refresh: string) {
-    localStorage.setItem('accessToken', access);
-    localStorage.setItem('refreshToken', refresh);
+    sessionStorage.setItem('accessToken', access);
+    sessionStorage.setItem('refreshToken', refresh);
   },
   clear() {
-    ['accessToken', 'refreshToken', 'user'].forEach((k) => localStorage.removeItem(k));
+    ['accessToken', 'refreshToken', 'user'].forEach((k) => sessionStorage.removeItem(k));
   },
 };
 

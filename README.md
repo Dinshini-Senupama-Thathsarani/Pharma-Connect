@@ -57,10 +57,10 @@ All responses use `{ success, message?, data? }` with proper HTTP status codes.
 cd server
 npm install
 cp .env.example .env      # fill MONGO_URI and two long random secrets
-npm run seed              # creates admin + sample medicines
+npm run seed              # idempotently adds demo users, medicines, pharmacies, and orders
 npm run dev               # http://localhost:5000
 ```
-Seeded admin: `admin@pharmaconnect.lk` / `Admin@123` (change after first login).
+Newly created demo users share the password `Demo@123`; change it after signing in. The seed does not overwrite existing records or passwords. If the admin account was created by an older version of the seed, its original password remains `Admin@123` because rerunning the seed does not reset existing passwords.
 
 ### 2. Frontend
 ```bash

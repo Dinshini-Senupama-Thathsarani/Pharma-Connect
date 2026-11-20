@@ -45,7 +45,13 @@ export const getStats = async (req: Request, res: Response) => {
     pendingOrders: totals[0]?.pendingOrders ?? 0,
     revenue: totals[0]?.revenue ?? 0,
     pharmacies,
-    monthlySales: monthly.map((m) => ({ month: m._id, sales: m.sales, orders: m.orders })),
+    monthlySales: Array.from({ length: 6 }, (_, index) => {
+      const date = new Date(since);
+      date.setMonth(since.getMonth() + index);
+      const month = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+      const data = monthly.find((item) => item._id === month);
+      return { month, sales: data?.sales ?? 0, orders: data?.orders ?? 0 };
+    }),
     topMedicines: top.map((t) => ({ name: t._id, qty: t.qty, sales: t.sales })),
   };
 
